@@ -7,7 +7,7 @@ const {
     deleteUser,
     addFriend,
     removeFriend
-} = require('../../controllers/user-controller');
+} = require('../../controllers/userController');
 
 //  retrieve all users/create new user
 router.route('/').get(getAllUsers).post(createUser);
@@ -19,3 +19,5 @@ router.route('/:id').get(getUserById).put(updateUser).delete(deleteUser);
 router.route('/:userId/friends/:friendId').post(addFriend).delete(removeFriend);
 
 module.exports = router;
+
+//might have to use mongoose's patch method to update users
