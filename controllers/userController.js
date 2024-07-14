@@ -4,9 +4,11 @@ const User = require('../models/user');
 module.exports = {
     async getAllUsers(req, res) {
         try {
+            // await User.deleteMany({});
             const users = await User.find({});
             res.json(users);
         } catch (error) {
+            console.log(error);
             res.status(500).json(error);
         }
     },
@@ -62,26 +64,31 @@ module.exports = {
             res.status(500).json(error);
         }
     },
-    async addFriend({ params }, res) {
+    async addFriend({ params: { userId, friendId } }, res) {
         try {
-            const user = await User.findOneAndUpdate(
-                { _id: params.id },
-                { $push: { friends: params.friendId } },
-                { new: true }
-            );
+            console.log(userId)
+            const user = await User.findById(userId);
+            // const user = await User.findOne({
+            //     _id: userId
+            // })
             if (!user) {
                 res.status(404).json({ message: 'No user found with this id!' });
                 return;
             }
-            res.json(user);
+            // Assuming the user model has a friends array to push the new friendId into
+            user.friends.push(friendId);
+            await user.save(); // Save the updated user document with the new friend
+    
+            res.json({ message: 'Friend added successfully!', user });
         } catch (error) {
+            console.log(error)
             res.status(500).json(error);
         }
     },
     async removeFriend({ params }, res) {
         try {
             const user = await User.findOneAndUpdate(
-                { _id: params.id },
+                { _id: params.userId },
                 { $pull: { friends: params.friendId } },
                 { new: true }
             );

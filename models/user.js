@@ -1,4 +1,7 @@
 const {Schema, model } = require('mongoose');
+// const friendsSchema = require('./Friends');
+const dateFormat = require('../utils/dateFormat');
+
 
 const userSchema = new Schema(
     {
@@ -18,9 +21,9 @@ const userSchema = new Schema(
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Thought'
-            }
-        ],
-        friends: [
+            }],
+    
+        friends:[
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User'
