@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a backend database api intended for use in social media.
+This is a backend database api intended for use in social media to track users, thoughts, reactions, and friends.
 
 ## Table of Contents
 
@@ -15,7 +15,7 @@ This is a backend database api intended for use in social media.
 
 ## Installation
 
-Go to https://github.com/Katherine-Be/ForCode_Editor. Clone the repository and run "npm run install" in your terminal, followed by "node server.js".
+Go to https://github.com/Katherine-Be/Socialite. Clone the repository and run "npm run install" in your terminal, followed by "node server.js".
 
 ## Use
 
