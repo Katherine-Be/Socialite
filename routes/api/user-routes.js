@@ -21,4 +21,3 @@ router.route('/:userId/friends/:friendId').post(addFriend).delete(removeFriend);
 
 module.exports = router;
 
-//might have to use mongoose's patch method to update users

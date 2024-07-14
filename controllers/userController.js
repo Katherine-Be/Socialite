@@ -4,7 +4,7 @@ const User = require('../models/user');
 module.exports = {
     async getAllUsers(req, res) {
         try {
-            // await User.deleteMany({});
+            // await User.deleteMany({}); //use if deleteing all users
             const users = await User.find({});
             res.json(users);
         } catch (error) {
@@ -75,9 +75,8 @@ module.exports = {
                 res.status(404).json({ message: 'No user found with this id!' });
                 return;
             }
-            // Assuming the user model has a friends array to push the new friendId into
             user.friends.push(friendId);
-            await user.save(); // Save the updated user document with the new friend
+            await user.save();
     
             res.json({ message: 'Friend added successfully!', user });
         } catch (error) {

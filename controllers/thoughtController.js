@@ -33,14 +33,13 @@ module.exports = {
     },
     async updateThought({ params, body }, res) {
         try {
-            // Assuming 'reactions' is the field you don't want to change.
-            // Remove 'reactions' from the body object if it exists.
+
             const updateBody = { ...body };
-            delete updateBody.reactions; // Ensure reactions are not updated
+            delete updateBody.reactions; 
     
             const thought = await Thought.findOneAndUpdate(
                 { _id: params.id },
-                { $set: updateBody }, // Use $set to update only specified fields
+                { $set: updateBody },
                 { new: true, runValidators: true }
             );
     
@@ -78,9 +77,6 @@ module.exports = {
                 res.status(404).json({ message: 'No thought found with this id!' });
                 return;
             }
-            // Assuming reactions are stored within the thought document,
-            // they can be accessed directly. If needed, you can manipulate
-            // or format the reactions data here before sending the response.
             res.json({ thought, reactions: thought.reactions });
         } catch (error) {
             res.status(500).json(error);
@@ -93,9 +89,8 @@ module.exports = {
                 res.status(404).json({ message: 'No thought found with this id!' });
                 return;
             }
-            // Assuming the thought model has a reactions array to push the new reaction into
             thought.reactions.push(reactionBody);
-            await thought.save(); // Save the updated thought document with the new reaction
+            await thought.save(); 
     
             res.json({ message: 'Reaction added successfully!', thought });
         } catch (error) {
@@ -117,7 +112,7 @@ module.exports = {
     
             res.json({ message: 'Reaction deleted successfully!', thought });
         } catch (error) {
-            console.error('Error in deleteReaction:', error); // Log the error to the console
+            console.error('Error in deleteReaction:', error); 
             res.status(500).json({ message: 'An error occurred', error: error.message });
         }
     }
